@@ -48,7 +48,6 @@ export const Register = () => {
           color="primary"
           variant="contained"
           fullWidth
-          // disabled={password != password2 || password.length < 8 ? true : false}
           onClick={() => submit(username, password, setMessage)}
         >
           Register

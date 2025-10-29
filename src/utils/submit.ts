@@ -12,7 +12,7 @@ export const submit = async (
   })
     .then((response) => {
       return response.json().then((data) => {
-        if (response.status === 201) {
+        if (response.ok) {
           setMessage(data.message);
         } else {
           alert(data.message);
