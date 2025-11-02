@@ -3,7 +3,7 @@ export const submit = async (
   password: string,
   setMessage: Function
 ) => {
-  fetch("http://localhost:8080/users/register", {
+  fetch("http://localhost:90/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
