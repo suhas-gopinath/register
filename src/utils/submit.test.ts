@@ -1,7 +1,7 @@
 import { submit } from "./submit";
 
-global.fetch = jest.fn();
-global.alert = jest.fn();
+globalThis.fetch = jest.fn();
+globalThis.alert = jest.fn();
 
 describe("submit()", () => {
   const mockSetMessage = jest.fn();

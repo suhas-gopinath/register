@@ -4,7 +4,7 @@ import { ValidationMessage } from "./ValidationMessage";
 
 describe("<ValidationMessage />", () => {
   it("renders all validation messages", () => {
-    const {} = render(
+    render(
       <ValidationMessage username="user" password1="pass" password2="pass" />
     );
 
