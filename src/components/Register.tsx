@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { ValidationMessage } from "./ValidationMessage";
 import { submit } from "../utils/submit";
+import {
+  hasWhitespace,
+  isPasswordLengthValid,
+  isPasswordMatch,
+  isStrongPassword,
+  isUsernameLengthValid,
+  isUsernamePatternValid,
+} from "../utils/validation";
 
 export const Register = () => {
   const [username, setUsername] = useState<string>("");
@@ -16,6 +24,7 @@ export const Register = () => {
           label="Username"
           variant="outlined"
           fullWidth
+          data-testid="username"
           margin="normal"
           value={username}
           onChange={(e) => setUsername(e.target.value.toLowerCase().trim())}
@@ -23,6 +32,7 @@ export const Register = () => {
         <TextField
           label="Password"
           type="password"
+          data-testid="password"
           variant="outlined"
           fullWidth
           margin="normal"
@@ -32,6 +42,7 @@ export const Register = () => {
         <TextField
           label=" Re-type Password"
           type="password"
+          data-testid="retypePassword"
           variant="outlined"
           fullWidth
           margin="normal"
@@ -47,6 +58,14 @@ export const Register = () => {
         <Button
           color="primary"
           variant="contained"
+          disabled={
+            !isUsernameLengthValid(username) ||
+            !isUsernamePatternValid(username) ||
+            !isPasswordMatch(password, password2) ||
+            hasWhitespace(password) ||
+            !isStrongPassword(password) ||
+            !isPasswordLengthValid(password)
+          }
           fullWidth
           onClick={() => submit(username, password, setMessage)}
         >

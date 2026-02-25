@@ -1,91 +1,123 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Register } from "./Register";
-import { submit } from "../utils/submit";
 
-jest.mock("../utils/submit", () => ({
-  submit: jest.fn(),
+import * as validation from "../utils/validation";
+import * as submitModule from "../utils/submit";
+
+jest.mock("../utils/validation");
+jest.mock("../utils/submit");
+
+jest.mock("./ValidationMessage", () => ({
+  ValidationMessage: () => <div data-testid="validation-message" />,
 }));
 
-describe("Register component", () => {
+describe("Register Component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test("renders all input fields and register button initially", () => {
+  const mockAllValidations = (value: boolean) => {
+    (validation.isUsernameLengthValid as jest.Mock).mockReturnValue(value);
+    (validation.isUsernamePatternValid as jest.Mock).mockReturnValue(value);
+    (validation.isPasswordMatch as jest.Mock).mockReturnValue(value);
+    (validation.hasWhitespace as jest.Mock).mockReturnValue(!value);
+    (validation.isStrongPassword as jest.Mock).mockReturnValue(value);
+    (validation.isPasswordLengthValid as jest.Mock).mockReturnValue(value);
+  };
+
+  test("renders inputs and button when message is empty", () => {
     render(<Register />);
 
     expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/^password$/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/re-type password/i)).toBeInTheDocument();
+    expect(screen.getByTestId("validation-message")).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /register/i })
+      screen.getByRole("button", { name: /register/i }),
     ).toBeInTheDocument();
   });
 
-  test("updates username input in lowercase and trimmed", () => {
+  test("username is lowercased and trimmed", async () => {
     render(<Register />);
+    const user = userEvent.setup();
 
     const usernameInput = screen.getByLabelText(/username/i);
 
-    fireEvent.change(usernameInput, {
-      target: { value: "  JohnDoe  " },
-    });
+    await user.type(usernameInput, "  TESTUser  ");
 
-    expect(usernameInput).toHaveValue("johndoe");
+    expect(usernameInput).toHaveValue("testuser");
   });
 
-  test("updates password and confirm password fields", () => {
+  test("password fields update correctly", async () => {
     render(<Register />);
+    const user = userEvent.setup();
 
     const passwordInput = screen.getByLabelText(/^password$/i);
-    const confirmPasswordInput = screen.getByLabelText(/re-type password/i);
+    const retypeInput = screen.getByLabelText(/re-type password/i);
 
-    fireEvent.change(passwordInput, {
-      target: { value: "Password@123" },
-    });
+    await user.type(passwordInput, "Password123!");
+    await user.type(retypeInput, "Password123!");
 
-    fireEvent.change(confirmPasswordInput, {
-      target: { value: "Password@123" },
-    });
-
-    expect(passwordInput).toHaveValue("Password@123");
-    expect(confirmPasswordInput).toHaveValue("Password@123");
+    expect(passwordInput).toHaveValue("Password123!");
+    expect(retypeInput).toHaveValue("Password123!");
   });
 
-  test("calls submit with correct arguments on register click", () => {
+  test("button is disabled when validations fail", () => {
+    mockAllValidations(false);
+
     render(<Register />);
+    const button = screen.getByRole("button", { name: /register/i });
 
-    fireEvent.change(screen.getByLabelText(/username/i), {
-      target: { value: "user123" },
-    });
+    expect(button).toBeDisabled();
+  });
 
-    fireEvent.change(screen.getByLabelText(/^password$/i), {
-      target: { value: "Password@123" },
-    });
+  test("button is enabled when validations pass", () => {
+    mockAllValidations(true);
 
-    fireEvent.click(screen.getByRole("button", { name: /register/i }));
+    render(<Register />);
+    const button = screen.getByRole("button", { name: /register/i });
 
-    expect(submit).toHaveBeenCalledTimes(1);
+    expect(button).toBeEnabled();
+  });
 
-    expect(submit).toHaveBeenCalledWith(
-      "user123",
-      "Password@123",
-      expect.any(Function)
+  test("calls submit with correct values when clicked", async () => {
+    mockAllValidations(true);
+
+    const submitMock = submitModule.submit as jest.Mock;
+
+    render(<Register />);
+    const user = userEvent.setup();
+
+    const usernameInput = screen.getByLabelText(/username/i);
+    const passwordInput = screen.getByLabelText(/^password$/i);
+    const button = screen.getByRole("button", { name: /register/i });
+
+    await user.type(usernameInput, "TestUser");
+    await user.type(passwordInput, "Password123!");
+    await user.click(button);
+
+    expect(submitMock).toHaveBeenCalledWith(
+      "testuser",
+      "Password123!",
+      expect.any(Function),
     );
   });
 
-  test("displays success message when message state is set", () => {
-    (submit as jest.Mock).mockImplementation(
-      (_u: string, _p: string, setMessage: Function) => {
+  test("renders success message when message state is set", async () => {
+    mockAllValidations(true);
+
+    (submitModule.submit as jest.Mock).mockImplementation(
+      (_username, _password, setMessage) => {
         setMessage("Registration successful");
-      }
+      },
     );
 
     render(<Register />);
+    const user = userEvent.setup();
 
-    fireEvent.click(screen.getByRole("button", { name: /register/i }));
+    await user.click(screen.getByRole("button", { name: /register/i }));
 
     expect(screen.getByText("Registration successful")).toBeInTheDocument();
   });
