@@ -1,0 +1,555 @@
+{
+  "src\\components\\Register.test.tsx": {
+    "filename": "Register.test.tsx",
+    "path": "src\\components\\Register.test.tsx",
+    "version": "1.2",
+    "contextFile": null,
+    "chunks": {
+      "634d3b": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774427251,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentWriteTool",
+        "extraContext": {},
+        "hash": "c4fbbc0b",
+        "messageId": null,
+        "codeBlockId": null,
+        "isActive": true
+      }
+    },
+    "lines": {
+      "0": {
+        "chunkId": "634d3b",
+        "hash": "d4f2d3d0",
+        "encoded": "import%20React%20from%20%22react%22;",
+        "prevChunkIds": []
+      },
+      "1": {
+        "chunkId": "634d3b",
+        "hash": "4c92f196",
+        "encoded": "import%20%7B%20render,%20screen%20%7D%20from%20%22@testing-library/react%22;",
+        "prevChunkIds": []
+      },
+      "2": {
+        "chunkId": "634d3b",
+        "hash": "d76e6209",
+        "encoded": "import%20userEvent%20from%20%22@testing-library/user-event%22;",
+        "prevChunkIds": []
+      },
+      "3": {
+        "chunkId": "634d3b",
+        "hash": "0652f253",
+        "encoded": "import%20%7B%20Register%20%7D%20from%20%22./Register%22;",
+        "prevChunkIds": []
+      },
+      "5": {
+        "chunkId": "634d3b",
+        "hash": "7277ae86",
+        "encoded": "import%20*%20as%20validation%20from%20%22../utils/validation%22;",
+        "prevChunkIds": []
+      },
+      "6": {
+        "chunkId": "634d3b",
+        "hash": "bbc2c126",
+        "encoded": "import%20*%20as%20submitModule%20from%20%22../utils/submit%22;",
+        "prevChunkIds": []
+      },
+      "8": {
+        "chunkId": "634d3b",
+        "hash": "0b7cea5d",
+        "encoded": "jest.mock(%22../utils/validation%22);",
+        "prevChunkIds": []
+      },
+      "9": {
+        "chunkId": "634d3b",
+        "hash": "e578f761",
+        "encoded": "jest.mock(%22../utils/submit%22);",
+        "prevChunkIds": []
+      },
+      "11": {
+        "chunkId": "634d3b",
+        "hash": "9af51f6c",
+        "encoded": "jest.mock(%22./ValidationMessage%22,%20()%20=%3E%20(%7B",
+        "prevChunkIds": []
+      },
+      "12": {
+        "chunkId": "634d3b",
+        "hash": "871a7357",
+        "encoded": "ValidationMessage:%20()%20=%3E%20%3Cdiv%20data-testid=%22validation-message%22%20/%3E,",
+        "prevChunkIds": []
+      },
+      "13": {
+        "chunkId": "634d3b",
+        "hash": "8125b6a2",
+        "encoded": "%7D));",
+        "prevChunkIds": []
+      },
+      "15": {
+        "chunkId": "634d3b",
+        "hash": "0e6e33f6",
+        "encoded": "describe(%22Register%20Component%22,%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "16": {
+        "chunkId": "634d3b",
+        "hash": "3dec2776",
+        "encoded": "beforeEach(()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "17": {
+        "chunkId": "634d3b",
+        "hash": "a1559c3d",
+        "encoded": "jest.clearAllMocks();",
+        "prevChunkIds": []
+      },
+      "18": {
+        "chunkId": "634d3b",
+        "hash": "ff07c7b3",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "20": {
+        "chunkId": "634d3b",
+        "hash": "b1891fa7",
+        "encoded": "const%20mockAllValidations%20=%20(value:%20boolean)%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "21": {
+        "chunkId": "634d3b",
+        "hash": "7c7a5be7",
+        "encoded": "(validation.isUsernameLengthValid%20as%20jest.Mock).mockReturnValue(value);",
+        "prevChunkIds": []
+      },
+      "22": {
+        "chunkId": "634d3b",
+        "hash": "de5f14d0",
+        "encoded": "(validation.isUsernamePatternValid%20as%20jest.Mock).mockReturnValue(value);",
+        "prevChunkIds": []
+      },
+      "23": {
+        "chunkId": "634d3b",
+        "hash": "84dfaaa8",
+        "encoded": "(validation.isPasswordMatch%20as%20jest.Mock).mockReturnValue(value);",
+        "prevChunkIds": []
+      },
+      "24": {
+        "chunkId": "634d3b",
+        "hash": "a8f380bd",
+        "encoded": "(validation.hasWhitespace%20as%20jest.Mock).mockReturnValue(!value);",
+        "prevChunkIds": []
+      },
+      "25": {
+        "chunkId": "634d3b",
+        "hash": "3a339ac7",
+        "encoded": "(validation.isStrongPassword%20as%20jest.Mock).mockReturnValue(value);",
+        "prevChunkIds": []
+      },
+      "26": {
+        "chunkId": "634d3b",
+        "hash": "345460e8",
+        "encoded": "(validation.isPasswordLengthValid%20as%20jest.Mock).mockReturnValue(value);",
+        "prevChunkIds": []
+      },
+      "27": {
+        "chunkId": "634d3b",
+        "hash": "a3b06819",
+        "encoded": "%7D;",
+        "prevChunkIds": []
+      },
+      "29": {
+        "chunkId": "634d3b",
+        "hash": "bbe70017",
+        "encoded": "test(%22renders%20inputs%20and%20button%20when%20message%20is%20empty%22,%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "30": {
+        "chunkId": "634d3b",
+        "hash": "99410a1f",
+        "encoded": "render(%3CRegister%20/%3E);",
+        "prevChunkIds": []
+      },
+      "32": {
+        "chunkId": "634d3b",
+        "hash": "4f520a1a",
+        "encoded": "expect(screen.getByLabelText(/username/i)).toBeInTheDocument();",
+        "prevChunkIds": []
+      },
+      "33": {
+        "chunkId": "634d3b",
+        "hash": "7626c153",
+        "encoded": "expect(screen.getByLabelText(/%5Epassword$/i)).toBeInTheDocument();",
+        "prevChunkIds": []
+      },
+      "34": {
+        "chunkId": "634d3b",
+        "hash": "963848eb",
+        "encoded": "expect(screen.getByLabelText(/retype%20password/i)).toBeInTheDocument();",
+        "prevChunkIds": []
+      },
+      "35": {
+        "chunkId": "634d3b",
+        "hash": "95f0224d",
+        "encoded": "expect(screen.getByTestId(%22validation-message%22)).toBeInTheDocument();",
+        "prevChunkIds": []
+      },
+      "36": {
+        "chunkId": "634d3b",
+        "hash": "b957ec0d",
+        "encoded": "expect(",
+        "prevChunkIds": []
+      },
+      "37": {
+        "chunkId": "634d3b",
+        "hash": "4bc70c36",
+        "encoded": "screen.getByRole(%22button%22,%20%7B%20name:%20/register/i%20%7D),",
+        "prevChunkIds": []
+      },
+      "38": {
+        "chunkId": "634d3b",
+        "hash": "5b18bc8a",
+        "encoded": ").toBeInTheDocument();",
+        "prevChunkIds": []
+      },
+      "39": {
+        "chunkId": "634d3b",
+        "hash": "03c250ed",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "41": {
+        "chunkId": "634d3b",
+        "hash": "47d6d65a",
+        "encoded": "test(%22username%20is%20lowercased%20and%20trimmed%22,%20async%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "42": {
+        "chunkId": "634d3b",
+        "hash": "31be1de0",
+        "encoded": "render(%3CRegister%20/%3E);",
+        "prevChunkIds": []
+      },
+      "44": {
+        "chunkId": "634d3b",
+        "hash": "473ffd1d",
+        "encoded": "const%20usernameInput%20=%20screen.getByLabelText(/username/i);",
+        "prevChunkIds": []
+      },
+      "46": {
+        "chunkId": "634d3b",
+        "hash": "c58e0f6d",
+        "encoded": "await%20userEvent.type(usernameInput,%20%22%20%20TESTUser%20%20%22);",
+        "prevChunkIds": []
+      },
+      "48": {
+        "chunkId": "634d3b",
+        "hash": "dd8d23c5",
+        "encoded": "expect(usernameInput).toHaveValue(%22testuser%22);",
+        "prevChunkIds": []
+      },
+      "49": {
+        "chunkId": "634d3b",
+        "hash": "d7c2ec52",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "51": {
+        "chunkId": "634d3b",
+        "hash": "07a2b57b",
+        "encoded": "test(%22password%20fields%20update%20correctly%22,%20async%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "52": {
+        "chunkId": "634d3b",
+        "hash": "03f7dde7",
+        "encoded": "render(%3CRegister%20/%3E);",
+        "prevChunkIds": []
+      },
+      "54": {
+        "chunkId": "634d3b",
+        "hash": "ec3b99f0",
+        "encoded": "const%20passwordInput%20=%20screen.getByLabelText(/%5Epassword$/i);",
+        "prevChunkIds": []
+      },
+      "55": {
+        "chunkId": "634d3b",
+        "hash": "47a610e3",
+        "encoded": "const%20retypeInput%20=%20screen.getByLabelText(/retype%20password/i);",
+        "prevChunkIds": []
+      },
+      "57": {
+        "chunkId": "634d3b",
+        "hash": "fcdd466d",
+        "encoded": "await%20userEvent.type(passwordInput,%20%22Password123!%22);",
+        "prevChunkIds": []
+      },
+      "58": {
+        "chunkId": "634d3b",
+        "hash": "d5b97f80",
+        "encoded": "await%20userEvent.type(retypeInput,%20%22Password123!%22);",
+        "prevChunkIds": []
+      },
+      "60": {
+        "chunkId": "634d3b",
+        "hash": "eee4fd3d",
+        "encoded": "expect(passwordInput).toHaveValue(%22Password123!%22);",
+        "prevChunkIds": []
+      },
+      "61": {
+        "chunkId": "634d3b",
+        "hash": "6e408ad6",
+        "encoded": "expect(retypeInput).toHaveValue(%22Password123!%22);",
+        "prevChunkIds": []
+      },
+      "62": {
+        "chunkId": "634d3b",
+        "hash": "b54befcd",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "64": {
+        "chunkId": "634d3b",
+        "hash": "f82ef014",
+        "encoded": "test(%22button%20is%20disabled%20when%20validations%20fail%22,%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "65": {
+        "chunkId": "634d3b",
+        "hash": "b017c57b",
+        "encoded": "mockAllValidations(false);",
+        "prevChunkIds": []
+      },
+      "67": {
+        "chunkId": "634d3b",
+        "hash": "a724ab77",
+        "encoded": "render(%3CRegister%20/%3E);",
+        "prevChunkIds": []
+      },
+      "68": {
+        "chunkId": "634d3b",
+        "hash": "fb2f9f48",
+        "encoded": "const%20button%20=%20screen.getByRole(%22button%22,%20%7B%20name:%20/register/i%20%7D);",
+        "prevChunkIds": []
+      },
+      "70": {
+        "chunkId": "634d3b",
+        "hash": "0eb24dde",
+        "encoded": "expect(button).toBeDisabled();",
+        "prevChunkIds": []
+      },
+      "71": {
+        "chunkId": "634d3b",
+        "hash": "80aa1e64",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "73": {
+        "chunkId": "634d3b",
+        "hash": "d9657fb6",
+        "encoded": "test(%22button%20is%20enabled%20when%20validations%20pass%22,%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "74": {
+        "chunkId": "634d3b",
+        "hash": "a3806053",
+        "encoded": "mockAllValidations(true);",
+        "prevChunkIds": []
+      },
+      "76": {
+        "chunkId": "634d3b",
+        "hash": "3d9fa71f",
+        "encoded": "render(%3CRegister%20/%3E);",
+        "prevChunkIds": []
+      },
+      "77": {
+        "chunkId": "634d3b",
+        "hash": "819319e8",
+        "encoded": "const%20button%20=%20screen.getByRole(%22button%22,%20%7B%20name:%20/register/i%20%7D);",
+        "prevChunkIds": []
+      },
+      "79": {
+        "chunkId": "634d3b",
+        "hash": "e41b55c0",
+        "encoded": "expect(button).toBeEnabled();",
+        "prevChunkIds": []
+      },
+      "80": {
+        "chunkId": "634d3b",
+        "hash": "5f95f156",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "82": {
+        "chunkId": "634d3b",
+        "hash": "2607e0fa",
+        "encoded": "test(%22calls%20submit%20with%20correct%20values%20when%20clicked%22,%20async%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "83": {
+        "chunkId": "634d3b",
+        "hash": "d0596b89",
+        "encoded": "mockAllValidations(true);",
+        "prevChunkIds": []
+      },
+      "85": {
+        "chunkId": "634d3b",
+        "hash": "962a2b16",
+        "encoded": "const%20submitMock%20=%20submitModule.submit%20as%20jest.Mock;",
+        "prevChunkIds": []
+      },
+      "87": {
+        "chunkId": "634d3b",
+        "hash": "64117725",
+        "encoded": "render(%3CRegister%20/%3E);",
+        "prevChunkIds": []
+      },
+      "89": {
+        "chunkId": "634d3b",
+        "hash": "07573f7c",
+        "encoded": "const%20usernameInput%20=%20screen.getByLabelText(/username/i);",
+        "prevChunkIds": []
+      },
+      "90": {
+        "chunkId": "634d3b",
+        "hash": "84970629",
+        "encoded": "const%20passwordInput%20=%20screen.getByLabelText(/%5Epassword$/i);",
+        "prevChunkIds": []
+      },
+      "91": {
+        "chunkId": "634d3b",
+        "hash": "299b5afe",
+        "encoded": "const%20button%20=%20screen.getByRole(%22button%22,%20%7B%20name:%20/register/i%20%7D);",
+        "prevChunkIds": []
+      },
+      "93": {
+        "chunkId": "634d3b",
+        "hash": "7fda2f3a",
+        "encoded": "await%20userEvent.type(usernameInput,%20%22TestUser%22);",
+        "prevChunkIds": []
+      },
+      "94": {
+        "chunkId": "634d3b",
+        "hash": "54421ce1",
+        "encoded": "await%20userEvent.type(passwordInput,%20%22Password123!%22);",
+        "prevChunkIds": []
+      },
+      "95": {
+        "chunkId": "634d3b",
+        "hash": "968c02a9",
+        "encoded": "await%20userEvent.click(button);",
+        "prevChunkIds": []
+      },
+      "97": {
+        "chunkId": "634d3b",
+        "hash": "beed6432",
+        "encoded": "expect(submitMock).toHaveBeenCalledWith(",
+        "prevChunkIds": []
+      },
+      "98": {
+        "chunkId": "634d3b",
+        "hash": "ff3d6f19",
+        "encoded": "%22testuser%22,",
+        "prevChunkIds": []
+      },
+      "99": {
+        "chunkId": "634d3b",
+        "hash": "793b2f3e",
+        "encoded": "%22Password123!%22,",
+        "prevChunkIds": []
+      },
+      "100": {
+        "chunkId": "634d3b",
+        "hash": "59b54528",
+        "encoded": "expect.any(Function),",
+        "prevChunkIds": []
+      },
+      "101": {
+        "chunkId": "634d3b",
+        "hash": "6bd0d2bb",
+        "encoded": ");",
+        "prevChunkIds": []
+      },
+      "102": {
+        "chunkId": "634d3b",
+        "hash": "530a7fe5",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "104": {
+        "chunkId": "634d3b",
+        "hash": "0ca6b4ee",
+        "encoded": "test(%22renders%20success%20message%20when%20message%20state%20is%20set%22,%20async%20()%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "105": {
+        "chunkId": "634d3b",
+        "hash": "df8c9621",
+        "encoded": "mockAllValidations(true);",
+        "prevChunkIds": []
+      },
+      "107": {
+        "chunkId": "634d3b",
+        "hash": "6984778c",
+        "encoded": "(submitModule.submit%20as%20jest.Mock).mockImplementation(",
+        "prevChunkIds": []
+      },
+      "108": {
+        "chunkId": "634d3b",
+        "hash": "6d41a491",
+        "encoded": "(_username,%20_password,%20setMessage)%20=%3E%20%7B",
+        "prevChunkIds": []
+      },
+      "109": {
+        "chunkId": "634d3b",
+        "hash": "22194867",
+        "encoded": "setMessage(%22Registration%20successful%22);",
+        "prevChunkIds": []
+      },
+      "110": {
+        "chunkId": "634d3b",
+        "hash": "90f09ac1",
+        "encoded": "%7D,",
+        "prevChunkIds": []
+      },
+      "111": {
+        "chunkId": "634d3b",
+        "hash": "caa4e59c",
+        "encoded": ");",
+        "prevChunkIds": []
+      },
+      "113": {
+        "chunkId": "634d3b",
+        "hash": "35272eff",
+        "encoded": "render(%3CRegister%20/%3E);",
+        "prevChunkIds": []
+      },
+      "115": {
+        "chunkId": "634d3b",
+        "hash": "e30bba9b",
+        "encoded": "await%20userEvent.click(screen.getByRole(%22button%22,%20%7B%20name:%20/register/i%20%7D));",
+        "prevChunkIds": []
+      },
+      "117": {
+        "chunkId": "634d3b",
+        "hash": "01f4f085",
+        "encoded": "expect(screen.getByText(%22Registration%20successful%22)).toBeInTheDocument();",
+        "prevChunkIds": []
+      },
+      "118": {
+        "chunkId": "634d3b",
+        "hash": "f38e05b3",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      },
+      "119": {
+        "chunkId": "634d3b",
+        "hash": "3b7ac76c",
+        "encoded": "%7D);",
+        "prevChunkIds": []
+      }
+    }
+  }
+}

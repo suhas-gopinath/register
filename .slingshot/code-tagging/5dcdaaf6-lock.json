@@ -1,0 +1,286 @@
+{
+  "src\\components\\Register.tsx": {
+    "filename": "Register.tsx",
+    "path": "src\\components\\Register.tsx",
+    "version": "1.2",
+    "contextFile": null,
+    "chunks": {
+      "266982": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774436331,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentWriteTool",
+        "extraContext": {},
+        "hash": "1ba83879",
+        "messageId": null,
+        "codeBlockId": null,
+        "isActive": true
+      },
+      "ae0117": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774433682,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentEditTool",
+        "extraContext": {},
+        "hash": "b0848283",
+        "messageId": null,
+        "codeBlockId": null,
+        "isActive": false
+      },
+      "a49fd0": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774433682,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentEditTool",
+        "extraContext": {},
+        "hash": "4ed14e1f",
+        "messageId": null,
+        "codeBlockId": null,
+        "isActive": false
+      },
+      "04f5ca": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774433682,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentEditTool",
+        "extraContext": {},
+        "hash": "5ebf1f78",
+        "messageId": null,
+        "codeBlockId": null,
+        "isActive": false
+      },
+      "5d801b": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774436331,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentEditTool",
+        "extraContext": {},
+        "hash": "eddcdefb",
+        "messageId": null,
+        "codeBlockId": null,
+        "isActive": true
+      },
+      "cce19a": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774436331,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentEditTool",
+        "extraContext": {},
+        "hash": "a685fcc8",
+        "messageId": null,
+        "codeBlockId": null,
+        "isActive": false
+      }
+    },
+    "lines": {
+      "0": {
+        "chunkId": "266982",
+        "hash": "bd57658a",
+        "encoded": "import%20React,%20%7B%20useState%20%7D%20from%20%22react%22;",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "1": {
+        "chunkId": "266982",
+        "hash": "48bf493c",
+        "encoded": "import%20%7B%20ValidationMessage%20%7D%20from%20%22./ValidationMessage%22;",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "2": {
+        "chunkId": "266982",
+        "hash": "cde2ab07",
+        "encoded": "import%20%7B%20submit%20%7D%20from%20%22../utils/submit%22;",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "3": {
+        "chunkId": "266982",
+        "hash": "3a00d49f",
+        "encoded": "import%20%7B",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "4": {
+        "chunkId": "266982",
+        "hash": "d8f4f880",
+        "encoded": "hasWhitespace,",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "5": {
+        "chunkId": "266982",
+        "hash": "8fb52245",
+        "encoded": "isPasswordLengthValid,",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "6": {
+        "chunkId": "266982",
+        "hash": "793801f2",
+        "encoded": "isPasswordMatch,",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "7": {
+        "chunkId": "266982",
+        "hash": "49e57bdc",
+        "encoded": "isStrongPassword,",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "8": {
+        "chunkId": "266982",
+        "hash": "ac913072",
+        "encoded": "isUsernameLengthValid,",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "9": {
+        "chunkId": "266982",
+        "hash": "ac03d0a2",
+        "encoded": "isUsernamePatternValid,",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "10": {
+        "chunkId": "266982",
+        "hash": "9709c7d8",
+        "encoded": "%7D%20from%20%22../utils/validation%22;",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "11": {
+        "chunkId": "266982",
+        "hash": "a12820d1",
+        "encoded": "import%20%22./Register.css%22;",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "13": {
+        "chunkId": "266982",
+        "hash": "8d5a46ee",
+        "encoded": "export%20const%20Register%20=%20()%20=%3E%20%7B",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "14": {
+        "chunkId": "266982",
+        "hash": "03f284d5",
+        "encoded": "const%20%5Busername,%20setUsername%5D%20=%20useState%3Cstring%3E(%22%22);",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "15": {
+        "chunkId": "266982",
+        "hash": "2ad66d0c",
+        "encoded": "const%20%5Bpassword,%20setPassword%5D%20=%20useState%3Cstring%3E(%22%22);",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "16": {
+        "chunkId": "266982",
+        "hash": "1223da00",
+        "encoded": "const%20%5Bpassword2,%20setPassword2%5D%20=%20useState%3Cstring%3E(%22%22);",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "17": {
+        "chunkId": "266982",
+        "hash": "f9fc51ee",
+        "encoded": "const%20%5Bmessage,%20setMessage%5D%20=%20useState%3Cstring%3E(%22%22);",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "19": {
+        "chunkId": "266982",
+        "hash": "cd6418f6",
+        "encoded": "if%20(message%20==%20%22%22)%20%7B",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "20": {
+        "chunkId": "266982",
+        "hash": "9fb74b79",
+        "encoded": "return%20(",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "89": {
+        "chunkId": "5d801b",
+        "hash": "4b66386c",
+        "encoded": "username=%7Busername%7D",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "90": {
+        "chunkId": "5d801b",
+        "hash": "f6f6df61",
+        "encoded": "password1=%7Bpassword%7D",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "91": {
+        "chunkId": "5d801b",
+        "hash": "580fbee6",
+        "encoded": "password2=%7Bpassword2%7D",
+        "prevChunkIds": [
+          "266982"
+        ]
+      },
+      "92": {
+        "chunkId": "266982",
+        "hash": "92150388",
+        "encoded": "/%3E",
+        "prevChunkIds": [
+          "266982"
+        ]
+      }
+    }
+  }
+}

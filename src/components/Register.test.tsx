@@ -32,7 +32,7 @@ describe("Register Component", () => {
 
     expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/^password$/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/re-type password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/retype password/i)).toBeInTheDocument();
     expect(screen.getByTestId("validation-message")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /register/i }),
@@ -41,24 +41,22 @@ describe("Register Component", () => {
 
   test("username is lowercased and trimmed", async () => {
     render(<Register />);
-    const user = userEvent.setup();
 
     const usernameInput = screen.getByLabelText(/username/i);
 
-    await user.type(usernameInput, "  TESTUser  ");
+    await userEvent.type(usernameInput, "  TESTUser  ");
 
     expect(usernameInput).toHaveValue("testuser");
   });
 
   test("password fields update correctly", async () => {
     render(<Register />);
-    const user = userEvent.setup();
 
     const passwordInput = screen.getByLabelText(/^password$/i);
-    const retypeInput = screen.getByLabelText(/re-type password/i);
+    const retypeInput = screen.getByLabelText(/retype password/i);
 
-    await user.type(passwordInput, "Password123!");
-    await user.type(retypeInput, "Password123!");
+    await userEvent.type(passwordInput, "Password123!");
+    await userEvent.type(retypeInput, "Password123!");
 
     expect(passwordInput).toHaveValue("Password123!");
     expect(retypeInput).toHaveValue("Password123!");
@@ -88,15 +86,14 @@ describe("Register Component", () => {
     const submitMock = submitModule.submit as jest.Mock;
 
     render(<Register />);
-    const user = userEvent.setup();
 
     const usernameInput = screen.getByLabelText(/username/i);
     const passwordInput = screen.getByLabelText(/^password$/i);
     const button = screen.getByRole("button", { name: /register/i });
 
-    await user.type(usernameInput, "TestUser");
-    await user.type(passwordInput, "Password123!");
-    await user.click(button);
+    await userEvent.type(usernameInput, "TestUser");
+    await userEvent.type(passwordInput, "Password123!");
+    await userEvent.click(button);
 
     expect(submitMock).toHaveBeenCalledWith(
       "testuser",
@@ -115,9 +112,8 @@ describe("Register Component", () => {
     );
 
     render(<Register />);
-    const user = userEvent.setup();
 
-    await user.click(screen.getByRole("button", { name: /register/i }));
+    await userEvent.click(screen.getByRole("button", { name: /register/i }));
 
     expect(screen.getByText("Registration successful")).toBeInTheDocument();
   });

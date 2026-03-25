@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
 import { ValidationMessage } from "./ValidationMessage";
 import { submit } from "../utils/submit";
 import {
@@ -10,6 +9,7 @@ import {
   isUsernameLengthValid,
   isUsernamePatternValid,
 } from "../utils/validation";
+import "./Register.css";
 
 export const Register = () => {
   const [username, setUsername] = useState<string>("");
@@ -19,61 +19,88 @@ export const Register = () => {
 
   if (message == "") {
     return (
-      <>
-        <TextField
-          label="Username"
-          variant="outlined"
-          fullWidth
-          data-testid="username"
-          margin="normal"
-          value={username}
-          onChange={(e) => setUsername(e.target.value.toLowerCase().trim())}
-        />
-        <TextField
-          label="Password"
-          type="password"
-          data-testid="password"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <TextField
-          label=" Re-type Password"
-          type="password"
-          data-testid="retypePassword"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
-        />
+      <div className="register-container">
+        <div className="register-layout">
+          <div className="register-form">
+            <h2 className="register-title">Create Account</h2>
 
-        <ValidationMessage
-          username={username}
-          password1={password}
-          password2={password2}
-        />
-        <Button
-          color="primary"
-          variant="contained"
-          disabled={
-            !isUsernameLengthValid(username) ||
-            !isUsernamePatternValid(username) ||
-            !isPasswordMatch(password, password2) ||
-            hasWhitespace(password) ||
-            !isStrongPassword(password) ||
-            !isPasswordLengthValid(password)
-          }
-          fullWidth
-          onClick={() => submit(username, password, setMessage)}
-        >
-          Register
-        </Button>
-      </>
+            <div className="form-group">
+              <label htmlFor="username" className="form-label">
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                className="form-input"
+                value={username}
+                onChange={(e) =>
+                  setUsername(e.target.value.toLowerCase().trim())
+                }
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="form-input"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="retypePassword" className="form-label">
+                Retype Password
+              </label>
+              <input
+                type="password"
+                id="retypePassword"
+                className="form-input"
+                placeholder="Confirm your password"
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+              />
+            </div>
+
+            <button
+              className="register-button"
+              disabled={
+                !isUsernameLengthValid(username) ||
+                !isUsernamePatternValid(username) ||
+                !isPasswordMatch(password, password2) ||
+                hasWhitespace(password) ||
+                !isStrongPassword(password) ||
+                !isPasswordLengthValid(password)
+              }
+              onClick={() => submit(username, password, setMessage)}
+            >
+              Register
+            </button>
+          </div>
+
+          <div className="validation-panel">
+            <h3 className="validation-title">Requirements</h3>
+            <div className="validation-section">
+              <ValidationMessage
+                username={username}
+                password1={password}
+                password2={password2}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     );
   } else {
-    return <div style={{ paddingTop: "20px", color: "green" }}>{message}</div>;
+    return (
+      <div className="register-container">
+        <div className="success-message">{message}</div>
+      </div>
+    );
   }
 };
