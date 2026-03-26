@@ -16,6 +16,7 @@ export const Register = () => {
   const [password, setPassword] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   if (message == "") {
     return (
@@ -70,6 +71,7 @@ export const Register = () => {
             <button
               className="register-button"
               disabled={
+                loading ||
                 !isUsernameLengthValid(username) ||
                 !isUsernamePatternValid(username) ||
                 !isPasswordMatch(password, password2) ||
