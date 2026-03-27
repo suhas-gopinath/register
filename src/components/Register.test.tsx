@@ -4,18 +4,33 @@ import userEvent from "@testing-library/user-event";
 import { Register } from "./Register";
 
 import * as validation from "../utils/validation";
-import * as submitModule from "../utils/submit";
 
 jest.mock("../utils/validation");
-jest.mock("../utils/submit");
+
+// Mock Module Federation remote module
+jest.mock("container/useApi", () => ({
+  useApi: jest.fn(),
+}));
+
+// Import the mocked module
+import { useApi } from "container/useApi";
+
+const mockUseApi = useApi as jest.Mock;
 
 jest.mock("./ValidationMessage", () => ({
   ValidationMessage: () => <div data-testid="validation-message" />,
 }));
 
 describe("Register Component", () => {
+  const mockCallApi = jest.fn();
+
   beforeEach(() => {
     jest.clearAllMocks();
+    // Default mock implementation for useApi
+    mockUseApi.mockReturnValue({
+      callApi: mockCallApi,
+      isLoading: false,
+    });
   });
 
   const mockAllValidations = (value: boolean) => {
@@ -80,10 +95,8 @@ describe("Register Component", () => {
     expect(button).toBeEnabled();
   });
 
-  test("calls submit with correct values when clicked", async () => {
+  test("calls callApi when register button is clicked", async () => {
     mockAllValidations(true);
-
-    const submitMock = submitModule.submit as jest.Mock;
 
     render(<Register />);
 
@@ -95,26 +108,32 @@ describe("Register Component", () => {
     await userEvent.type(passwordInput, "Password123!");
     await userEvent.click(button);
 
-    expect(submitMock).toHaveBeenCalledWith(
-      "testuser",
-      "Password123!",
-      expect.any(Function),
-    );
+    expect(mockCallApi).toHaveBeenCalled();
   });
 
   test("renders success message when message state is set", async () => {
     mockAllValidations(true);
 
-    (submitModule.submit as jest.Mock).mockImplementation(
-      (_username, _password, setMessage) => {
-        setMessage("Registration successful");
-      },
-    );
+    // Mock useApi to trigger success callback
+    const mockCallApiWithSuccess = jest.fn(async () => {
+      // Simulate successful API call by calling the onSuccess callback
+      const onSuccess = mockUseApi.mock.calls[0][1];
+      onSuccess("User registered successfully");
+    });
+
+    mockUseApi.mockReturnValue({
+      callApi: mockCallApiWithSuccess,
+      isLoading: false,
+    });
 
     render(<Register />);
 
     await userEvent.click(screen.getByRole("button", { name: /register/i }));
 
-    expect(screen.getByText("Registration successful")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Registration successful. You will be redirected to login page.",
+      ),
+    ).toBeInTheDocument();
   });
 });

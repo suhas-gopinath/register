@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ValidationMessage } from "./ValidationMessage";
-import { submit } from "../utils/submit";
+import { useApi } from "container/useApi";
+
 import {
   hasWhitespace,
   isPasswordLengthValid,
@@ -16,7 +17,29 @@ export const Register = () => {
   const [password, setPassword] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const { callApi, isLoading } = useApi(
+    "/register",
+    (successMessage: string) => {
+      setMessage(
+        "Registration successful. You will be redirected to login page.",
+      );
+      setTimeout(() => {
+        window.location.href = "http://localhost:3003/login";
+      }, 7000);
+    },
+    (errorMessage: string) => {
+      alert(errorMessage);
+    },
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+      credentials: "include",
+    },
+  );
 
   if (message == "") {
     return (
@@ -71,7 +94,7 @@ export const Register = () => {
             <button
               className="register-button"
               disabled={
-                loading ||
+                isLoading ||
                 !isUsernameLengthValid(username) ||
                 !isUsernamePatternValid(username) ||
                 !isPasswordMatch(password, password2) ||
@@ -79,7 +102,7 @@ export const Register = () => {
                 !isStrongPassword(password) ||
                 !isPasswordLengthValid(password)
               }
-              onClick={() => submit(username, password, setMessage)}
+              onClick={callApi}
             >
               Register
             </button>

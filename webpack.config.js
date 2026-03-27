@@ -48,7 +48,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "register",
       filename: "remoteEntry.js",
-      remotes: {},
+
+      remotes: {
+        container: "container@http://localhost:3003/remoteEntry.js",
+      },
       exposes: {
         "./Register": "./src/components/Register",
       },

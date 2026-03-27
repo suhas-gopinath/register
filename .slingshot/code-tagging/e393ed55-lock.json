@@ -18,63 +18,102 @@
         "hash": "a71d7037",
         "messageId": null,
         "codeBlockId": null,
+        "isActive": false
+      },
+      "85cc5d": {
+        "user": "Suhas Gopinath",
+        "model": "claude-sonnet-4-5@20250929",
+        "timestamp": 1774562367,
+        "platform": "VisualStudioCode",
+        "product": "AIPP",
+        "productVersion": "2.3.0",
+        "source": "agent",
+        "type": "agentWriteTool",
+        "extraContext": {},
+        "hash": "36cef6f1",
+        "messageId": null,
+        "codeBlockId": null,
         "isActive": true
       }
     },
     "lines": {
-      "0": {
-        "chunkId": "9adff1",
-        "hash": "37fae63c",
-        "encoded": "module.exports%20=%20%7B",
-        "prevChunkIds": []
-      },
       "1": {
-        "chunkId": "9adff1",
-        "hash": "7bf81e28",
-        "encoded": "preset:%20%22ts-jest%22,",
-        "prevChunkIds": []
+        "chunkId": "85cc5d",
+        "hash": "c4c9d554",
+        "encoded": "module.exports%20=%20%7B",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       },
       "2": {
-        "chunkId": "9adff1",
-        "hash": "865f7c59",
-        "encoded": "testEnvironment:%20%22jsdom%22,",
-        "prevChunkIds": []
+        "chunkId": "85cc5d",
+        "hash": "b14584ed",
+        "encoded": "preset:%20%22ts-jest%22,",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       },
       "3": {
-        "chunkId": "9adff1",
-        "hash": "d43767ff",
-        "encoded": "testMatch:%20%5B%22**/?(*.)+(test%7Cspec).ts?(x)%22%5D,",
-        "prevChunkIds": []
+        "chunkId": "85cc5d",
+        "hash": "c45b6761",
+        "encoded": "testEnvironment:%20%22jsdom%22,",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       },
       "4": {
-        "chunkId": "9adff1",
-        "hash": "5df767ee",
-        "encoded": "setupFilesAfterEnv:%20%5B%22%3CrootDir%3E/src/SetupTests.ts%22%5D,",
-        "prevChunkIds": []
+        "chunkId": "85cc5d",
+        "hash": "eb5eb41c",
+        "encoded": "testMatch:%20%5B%22**/?(*.)+(test%7Cspec).ts?(x)%22%5D,",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       },
       "5": {
-        "chunkId": "9adff1",
-        "hash": "ba40e719",
-        "encoded": "moduleNameMapper:%20%7B",
-        "prevChunkIds": []
+        "chunkId": "85cc5d",
+        "hash": "4681dd36",
+        "encoded": "setupFilesAfterEnv:%20%5B%22%3CrootDir%3E/src/SetupTests.ts%22%5D,",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       },
       "6": {
-        "chunkId": "9adff1",
-        "hash": "a77fdbb3",
-        "encoded": "%22%5C%5C.(css%7Cless%7Cscss%7Csass)$%22:%20%22identity-obj-proxy%22,",
-        "prevChunkIds": []
+        "chunkId": "85cc5d",
+        "hash": "95b9fdc9",
+        "encoded": "moduleNameMapper:%20%7B",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       },
       "7": {
-        "chunkId": "9adff1",
-        "hash": "56b41f88",
-        "encoded": "%7D,",
-        "prevChunkIds": []
+        "chunkId": "85cc5d",
+        "hash": "5e233504",
+        "encoded": "%22%5C%5C.(css%7Cless%7Cscss%7Csass)$%22:%20%22identity-obj-proxy%22,",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       },
       "8": {
-        "chunkId": "9adff1",
-        "hash": "af89cfeb",
-        "encoded": "%7D;",
+        "chunkId": "85cc5d",
+        "hash": "3de2a651",
+        "encoded": "%22%5Econtainer/useApi$%22:%20%22%3CrootDir%3E/src/__mocks__/container/useApi.ts%22,",
         "prevChunkIds": []
+      },
+      "9": {
+        "chunkId": "85cc5d",
+        "hash": "e58a5dfb",
+        "encoded": "%7D,",
+        "prevChunkIds": [
+          "9adff1"
+        ]
+      },
+      "10": {
+        "chunkId": "85cc5d",
+        "hash": "483280e4",
+        "encoded": "%7D;",
+        "prevChunkIds": [
+          "9adff1"
+        ]
       }
     }
   }
