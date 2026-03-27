@@ -20,74 +20,60 @@ export const ValidationMessage = ({
   password2,
 }: Props) => {
   return (
-
-
-    <ul style={{ listStyleType: "disc", paddingLeft: "20px", margin: 0 }}>
+    <ul style={{ listStyleType: "disc", paddingLeft: "16px", margin: 0 }}>
       <li
         style={{
-          fontSize: "20px",
+          fontSize: "17px",
           color: isUsernameLengthValid(username) ? "green" : "red",
           marginBottom: "8px",
         }}
       >
         Username should have minimum 6 and maximum 30 characters
-
-
       </li>
       <li
         style={{
-          fontSize: "20px",
+          fontSize: "17px",
           color: isUsernamePatternValid(username) ? "green" : "red",
           marginBottom: "8px",
         }}
       >
         Username can only contain Alphanumeric and ._- characters
-
-
       </li>
       <li
         style={{
-          fontSize: "20px",
+          fontSize: "17px",
           color: isPasswordLengthValid(password1) ? "green" : "red",
           marginBottom: "8px",
         }}
       >
         Password should have minimum 8 and maximum 64 characters
-
-
       </li>
       <li
         style={{
-          fontSize: "20px",
+          fontSize: "17px",
           color: hasWhitespace(password1) ? "red" : "green",
           marginBottom: "8px",
         }}
       >
         Password cannot contain whitespace
-
-
       </li>
       <li
         style={{
-          fontSize: "20px",
+          fontSize: "17px",
           color: isStrongPassword(password1) ? "green" : "red",
           marginBottom: "8px",
         }}
       >
         Password should contain lowercase, uppercase, digit and a special
         character(@$!%*?&)
-
-
       </li>
       <li
         style={{
-          fontSize: "20px",
+          fontSize: "17px",
           color: isPasswordMatch(password1, password2) ? "green" : "red",
         }}
       >
         Passwords should match
-
-
       </li>
     </ul>
   );
