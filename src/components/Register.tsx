@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ValidationMessage } from "./ValidationMessage";
 import { useApi } from "container/useApi";
-
 import {
   hasWhitespace,
   isPasswordLengthValid,
@@ -10,27 +9,33 @@ import {
   isUsernameLengthValid,
   isUsernamePatternValid,
 } from "../utils/validation";
+import { useMessage } from "container/useMessage";
 import "./Register.css";
 
 export const Register = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
+  const { showMessage } = useMessage();
+
+  const handleSuccess = (successMessage: string) => {
+    showMessage(
+      "success",
+      `${successMessage}. You will be redirected to login page.`,
+    );
+    setTimeout(() => {
+      window.location.href = "http://localhost:3003/login";
+    }, 5000);
+  };
+
+  const handleError = (errorMessage: string) => {
+    showMessage("error", errorMessage);
+  };
 
   const { callApi, isLoading } = useApi(
     "/register",
-    (successMessage: string) => {
-      setMessage(
-        "Registration successful. You will be redirected to login page.",
-      );
-      setTimeout(() => {
-        window.location.href = "http://localhost:3003/login";
-      }, 7000);
-    },
-    (errorMessage: string) => {
-      alert(errorMessage);
-    },
+    handleSuccess,
+    handleError,
     {
       method: "POST",
       headers: {
@@ -41,91 +46,82 @@ export const Register = () => {
     },
   );
 
-  if (message == "") {
-    return (
-      <div className="register-container">
-        <div className="register-layout">
-          <div className="register-form">
-            <h2 className="register-title">Create Account</h2>
+  const isDisabled =
+    isLoading ||
+    !isUsernameLengthValid(username) ||
+    !isUsernamePatternValid(username) ||
+    !isPasswordMatch(password, password2) ||
+    hasWhitespace(password) ||
+    !isStrongPassword(password) ||
+    !isPasswordLengthValid(password);
 
-            <div className="form-group">
-              <label htmlFor="username" className="form-label">
-                Username
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="form-input"
-                value={username}
-                onChange={(e) =>
-                  setUsername(e.target.value.toLowerCase().trim())
-                }
-              />
-            </div>
+  return (
+    <div className="register-container">
+      <div className="register-layout">
+        <div className="register-form">
+          <h2 className="register-title">Create Account</h2>
 
-            <div className="form-group">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="form-input"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="retypePassword" className="form-label">
-                Retype Password
-              </label>
-              <input
-                type="password"
-                id="retypePassword"
-                className="form-input"
-                placeholder="Confirm your password"
-                value={password2}
-                onChange={(e) => setPassword2(e.target.value)}
-              />
-            </div>
-
-            <button
-              className="register-button"
-              disabled={
-                isLoading ||
-                !isUsernameLengthValid(username) ||
-                !isUsernamePatternValid(username) ||
-                !isPasswordMatch(password, password2) ||
-                hasWhitespace(password) ||
-                !isStrongPassword(password) ||
-                !isPasswordLengthValid(password)
-              }
-              onClick={callApi}
-            >
-              Register
-            </button>
+          <div className="form-group">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="form-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value.toLowerCase().trim())}
+            />
           </div>
 
-          <div className="validation-panel">
-            <h3 className="validation-title">Requirements</h3>
-            <div className="validation-section">
-              <ValidationMessage
-                username={username}
-                password1={password}
-                password2={password2}
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="form-input"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="retypePassword" className="form-label">
+              Retype Password
+            </label>
+            <input
+              type="password"
+              id="retypePassword"
+              className="form-input"
+              placeholder="Confirm your password"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+            />
+          </div>
+
+          <button
+            className="register-button"
+            disabled={isDisabled}
+            onClick={callApi}
+          >
+            Register
+          </button>
+        </div>
+
+        <div className="validation-panel">
+          <h3 className="validation-title">Requirements</h3>
+          <div className="validation-section">
+            <ValidationMessage
+              username={username}
+              password1={password}
+              password2={password2}
+            />
           </div>
         </div>
       </div>
-    );
-  } else {
-    return (
-      <div className="register-container">
-        <div className="success-message">{message}</div>
-      </div>
-    );
-  }
+    </div>
+  );
 };

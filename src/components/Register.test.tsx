@@ -12,10 +12,18 @@ jest.mock("container/useApi", () => ({
   useApi: jest.fn(),
 }));
 
-// Import the mocked module
+
+// Mock useMessage hook
+jest.mock("container/useMessage", () => ({
+  useMessage: jest.fn(),
+}));
+
+// Import the mocked modules
 import { useApi } from "container/useApi";
+import { useMessage } from "container/useMessage";
 
 const mockUseApi = useApi as jest.Mock;
+const mockUseMessage = useMessage as jest.Mock;
 
 jest.mock("./ValidationMessage", () => ({
   ValidationMessage: () => <div data-testid="validation-message" />,
@@ -23,6 +31,7 @@ jest.mock("./ValidationMessage", () => ({
 
 describe("Register Component", () => {
   const mockCallApi = jest.fn();
+  const mockShowMessage = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -30,6 +39,10 @@ describe("Register Component", () => {
     mockUseApi.mockReturnValue({
       callApi: mockCallApi,
       isLoading: false,
+    });
+    // Default mock implementation for useMessage
+    mockUseMessage.mockReturnValue({
+      showMessage: mockShowMessage,
     });
   });
 
@@ -42,7 +55,8 @@ describe("Register Component", () => {
     (validation.isPasswordLengthValid as jest.Mock).mockReturnValue(value);
   };
 
-  test("renders inputs and button when message is empty", () => {
+
+  test("renders inputs and button", () => {
     render(<Register />);
 
     expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
@@ -111,7 +125,8 @@ describe("Register Component", () => {
     expect(mockCallApi).toHaveBeenCalled();
   });
 
-  test("renders success message when message state is set", async () => {
+
+  test("calls showMessage with success message on successful registration", async () => {
     mockAllValidations(true);
 
     // Mock useApi to trigger success callback
@@ -130,10 +145,39 @@ describe("Register Component", () => {
 
     await userEvent.click(screen.getByRole("button", { name: /register/i }));
 
-    expect(
-      screen.getByText(
-        "Registration successful. You will be redirected to login page.",
-      ),
-    ).toBeInTheDocument();
+
+
+
+
+
+    expect(mockShowMessage).toHaveBeenCalledWith(
+      "success",
+      "User registered successfully. You will be redirected to login page.",
+    );
+  });
+
+  test("calls showMessage with error message on failed registration", async () => {
+    mockAllValidations(true);
+
+    // Mock useApi to trigger error callback
+    const mockCallApiWithError = jest.fn(async () => {
+      // Simulate failed API call by calling the onError callback
+      const onError = mockUseApi.mock.calls[0][2];
+      onError("Username already exists");
+    });
+
+    mockUseApi.mockReturnValue({
+      callApi: mockCallApiWithError,
+      isLoading: false,
+    });
+
+    render(<Register />);
+
+    await userEvent.click(screen.getByRole("button", { name: /register/i }));
+
+    expect(mockShowMessage).toHaveBeenCalledWith(
+      "error",
+      "Username already exists",
+    );
   });
 });
