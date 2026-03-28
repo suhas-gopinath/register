@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { RegisterForm } from "./RegisterForm";
 
-// Lazy load MessageProvider and MessageDisplay
 const MessageProvider = lazy(() =>
   import("container/useMessage").then((module) => ({
     default: module.MessageProvider,
