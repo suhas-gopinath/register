@@ -5,65 +5,65 @@ import { ValidationMessage } from "./ValidationMessage";
 describe("<ValidationMessage />", () => {
   it("renders all validation messages", () => {
     render(
-      <ValidationMessage username="user" password1="pass" password2="pass" />
+      <ValidationMessage username="user" password1="pass" password2="pass" />,
     );
 
     expect(
       screen.getByText(
-        /Username should have minimum 6 and maximum 30 characters/i
-      )
+        /Username should have minimum 6 and maximum 30 characters/i,
+      ),
     ).toBeInTheDocument();
 
     expect(
       screen.getByText(
-        /Username can only contain Alphanumeric and ._- characters/i
-      )
+        /Username can only contain Alphanumeric and ._- characters/i,
+      ),
     ).toBeInTheDocument();
 
     expect(
       screen.getByText(
-        /Password should have minimum 8 and maximum 64 characters/i
-      )
+        /Password should have minimum 8 and maximum 64 characters/i,
+      ),
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText(/Password cannot contain whitespace/i)
+      screen.getByText(/Password cannot contain whitespace/i),
     ).toBeInTheDocument();
 
     expect(
       screen.getByText(
-        /Password should contain lowercase, uppercase, digit and a special/i
-      )
+        /Password should contain lowercase, uppercase, digit and a special/i,
+      ),
     ).toBeInTheDocument();
 
     expect(screen.getByText(/Passwords should match/i)).toBeInTheDocument();
   });
 
-  it("shows red styles when all validations fail", () => {
+  it("shows invalid class when all validations fail", () => {
     render(
-      <ValidationMessage username="u!" password1="abc " password2="xyz" />
+      <ValidationMessage username="u!" password1="abc " password2="xyz" />,
     );
 
-    const elements = screen.getAllByText(/./);
+    const elements = screen.getAllByRole("listitem");
 
     elements.forEach((el) => {
-      expect(el).toHaveStyle({ color: "red" });
+      expect(el).toHaveClass("validation-item", "invalid");
     });
   });
 
-  it("shows green styles when all validations pass", () => {
+  it("shows valid class when all validations pass", () => {
     render(
       <ValidationMessage
         username="valid_user"
         password1="Strong@123"
         password2="Strong@123"
-      />
+      />,
     );
 
-    const elements = screen.getAllByText(/./);
+    const elements = screen.getAllByRole("listitem");
 
     elements.forEach((el) => {
-      expect(el).toHaveStyle({ color: "green" });
+      expect(el).toHaveClass("validation-item", "valid");
     });
   });
 });

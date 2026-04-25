@@ -16,15 +16,17 @@ export const RegisterForm = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
+  const [disableButton, setDisableButton] = useState<boolean>(false);
   const { showMessage } = useMessage();
 
   const handleSuccess = (successMessage: string) => {
+    setDisableButton(true);
     showMessage(
       "success",
       `${successMessage}. You will be redirected to login page.`,
     );
     setTimeout(() => {
-      window.location.href = "http://localhost:3003/login";
+      window.location.href = "/login";
     }, 5000);
   };
 
@@ -48,6 +50,7 @@ export const RegisterForm = () => {
 
   const isDisabled =
     isLoading ||
+    disableButton ||
     !isUsernameLengthValid(username) ||
     !isUsernamePatternValid(username) ||
     !isPasswordMatch(password, password2) ||

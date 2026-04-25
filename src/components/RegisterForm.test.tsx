@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Register } from "./Register";
+import { RegisterForm } from "./RegisterForm";
 
 import * as validation from "../utils/validation";
 
@@ -11,7 +11,6 @@ jest.mock("../utils/validation");
 jest.mock("container/useApi", () => ({
   useApi: jest.fn(),
 }));
-
 
 // Mock useMessage hook
 jest.mock("container/useMessage", () => ({
@@ -55,9 +54,8 @@ describe("Register Component", () => {
     (validation.isPasswordLengthValid as jest.Mock).mockReturnValue(value);
   };
 
-
   test("renders inputs and button", () => {
-    render(<Register />);
+    render(<RegisterForm />);
 
     expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/^password$/i)).toBeInTheDocument();
@@ -69,7 +67,7 @@ describe("Register Component", () => {
   });
 
   test("username is lowercased and trimmed", async () => {
-    render(<Register />);
+    render(<RegisterForm />);
 
     const usernameInput = screen.getByLabelText(/username/i);
 
@@ -79,7 +77,7 @@ describe("Register Component", () => {
   });
 
   test("password fields update correctly", async () => {
-    render(<Register />);
+    render(<RegisterForm />);
 
     const passwordInput = screen.getByLabelText(/^password$/i);
     const retypeInput = screen.getByLabelText(/retype password/i);
@@ -94,7 +92,7 @@ describe("Register Component", () => {
   test("button is disabled when validations fail", () => {
     mockAllValidations(false);
 
-    render(<Register />);
+    render(<RegisterForm />);
     const button = screen.getByRole("button", { name: /register/i });
 
     expect(button).toBeDisabled();
@@ -103,7 +101,7 @@ describe("Register Component", () => {
   test("button is enabled when validations pass", () => {
     mockAllValidations(true);
 
-    render(<Register />);
+    render(<RegisterForm />);
     const button = screen.getByRole("button", { name: /register/i });
 
     expect(button).toBeEnabled();
@@ -112,7 +110,7 @@ describe("Register Component", () => {
   test("calls callApi when register button is clicked", async () => {
     mockAllValidations(true);
 
-    render(<Register />);
+    render(<RegisterForm />);
 
     const usernameInput = screen.getByLabelText(/username/i);
     const passwordInput = screen.getByLabelText(/^password$/i);
@@ -124,7 +122,6 @@ describe("Register Component", () => {
 
     expect(mockCallApi).toHaveBeenCalled();
   });
-
 
   test("calls showMessage with success message on successful registration", async () => {
     mockAllValidations(true);
@@ -141,14 +138,9 @@ describe("Register Component", () => {
       isLoading: false,
     });
 
-    render(<Register />);
+    render(<RegisterForm />);
 
     await userEvent.click(screen.getByRole("button", { name: /register/i }));
-
-
-
-
-
 
     expect(mockShowMessage).toHaveBeenCalledWith(
       "success",
@@ -171,7 +163,7 @@ describe("Register Component", () => {
       isLoading: false,
     });
 
-    render(<Register />);
+    render(<RegisterForm />);
 
     await userEvent.click(screen.getByRole("button", { name: /register/i }));
 
